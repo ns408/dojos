@@ -6,19 +6,16 @@
 - [brew installation]
 - github.com account
 
-## Steps
+## High-level
 
 - create/find github repo where your application code is present. <br> Eg: https://github.com/ns408/example_c_language
 - make your formula
-- modify your formula file to suit your needs
-- audit the formula
-- create the homebrew-$[tap,app] repo.
+- create the homebrew-tap repo.
   - two ways of doing that:
     - creating a single "homebrew-tap" repo. <br>(_easier to manage_)
     - creating per application "homebrew-$app" repos. <br>(_easier to manage history and reduces blast radius or unauthorised modifications to other than indended formulae_)
-- 
-
-
+- tap the homebrew-tap repo
+- install the program
 
 ## Runsheet
 
@@ -49,7 +46,7 @@ class ExampleCLanguage < Formula
 end
 EOF
 ```
-- or copy the formula from 
+- or copy the formula from https://raw.githubusercontent.com/ns408/homebrew-examples/master/example_c_language.rb
 - audit your formula
 ```shell
 brew audit --new-formula example_c_language
@@ -62,7 +59,22 @@ cd homebrew-tap
 mv /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/example_c_language.rb .
 ```
 - commit and push the change to the repo.
-- 
+- enable the tap
+```shell
+brew tap $github_user/homebrew-tap
+```
+- brew install the app
+```shell
+brew install example_c_language
+```
+- run the application
+```shell
+example_c_language
+```
+- where this binary is placed
+```shell
+ls -la $(which example_c_language)
+```
 
 ## Good to know
 
@@ -73,6 +85,10 @@ brew intall example_c_language -d
 - show all the taps
 ```shell
 brew tap
+```
+- untap a tap. Eg:
+```shell
+brew untap ns408/examples
 ```
 
 ## Reference:
